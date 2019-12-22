@@ -16,7 +16,6 @@
   "EchoTrainLength": 74,
   "EffectiveEchoSpacing": 0.000489993,
   "FlipAngle": 76,
-  "ImageOrientationPatientDICOM": [1, 0, 0, 0, 0.956305, -0.292372],
   "ImageType": [
     "ORIGINAL",
     "PRIMARY",
@@ -48,16 +47,13 @@
   "ReceiveCoilName": "HeadNeck_20",
   "ReconMatrixPE": 74,
   "RepetitionTime": 2.02,
-  "SAR": 0.111581,
   "ScanOptions": "FS",
   "ScanningSequence": "EP",
   "SequenceName": "_epfid2d1_74",
   "SequenceVariant": "SK",
-  "ShimSetting": [1449, -7418, 6533, 331, 143, 103, 29, 60],
   "SliceThickness": 2.8,
   "SoftwareVersions": "syngo_MR_E11",
   "SpacingBetweenSlices": 3.22,
   "StationName": "AWP166048",
   "TaskName": "TODO: full task name for sharedreward",
-  "TotalReadoutTime": 0.0357695,
-  "TxRefAmp": 278.861}
+  "TotalReadoutTime": 0.0357695}
