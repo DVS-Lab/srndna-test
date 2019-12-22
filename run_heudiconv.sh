@@ -19,7 +19,7 @@ nruns=$2
 
 # set up input and output directories.
 # NB: bidsroot should be the pwd
-bidsroot=/data/projects/srndna-all
+bidsroot=`pwd`
 sourcedata=/data/sourcedata/srndna
 
 # make bids folder if it doesn't exist

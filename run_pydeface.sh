@@ -6,8 +6,8 @@
 # example: bash run_pydeface.sh 102
 
 sub=$1
-
-bidsroot=/data/projects/srndna-all/bids
+maindir=`pwd`
+bidsroot=$maindir/bids
 
 # defacing anatomicals to ensure compatibility with data sharing
 pydeface.py ${bidsroot}/sub-${sub}/anat/sub-${sub}_T1w.nii.gz
