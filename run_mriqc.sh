@@ -17,7 +17,6 @@ singularity run --cleanenv \
 -B $maindir/bids:/data \
 -B $maindir/derivatives:/out \
 -B /data/scratch:/scratch \
--w /scratch \
 /data/tools/mriqc-0.15.1.simg \
 /data /out \
 participant --participant_label $sub --fft-spikes-detector --ica -w /scratch
