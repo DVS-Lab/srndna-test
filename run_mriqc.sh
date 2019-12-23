@@ -12,7 +12,6 @@ if [ ! -d $maindir/derivatives ]; then
 	mkdir -p $maindir/derivatives
 fi
 
-
 singularity run --cleanenv \
 -B $maindir/bids:/data \
 -B $maindir/derivatives:/out \
