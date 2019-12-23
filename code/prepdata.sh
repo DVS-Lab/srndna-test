@@ -31,11 +31,11 @@ fi
 # PART 1: running heudiconv and fixing fieldmaps
 
 if [ $sub -gt 121 ]; then
-  singularity run -B $dsroot:/out -B $sourcedata:/sourcedata \
+  singularity run --cleanenv -B $dsroot:/out -B $sourcedata:/sourcedata \
   /data/tools/heudiconv-0.5.4.simg -d /sourcedata/dicoms/SMITH-AgingDM-{subject}/*/DICOM/*.dcm -s $sub \
   -f /out/code/heuristics.py -c dcm2niix -b --minmeta -o /out/bids
 else
-  singularity run -B $dsroot:/out -B $sourcedata:/sourcedata \
+  singularity run --cleanenv -B $dsroot:/out -B $sourcedata:/sourcedata \
   /data/tools/heudiconv-0.5.4.simg -d /sourcedata/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
   -f /out/code/heuristics.py -c dcm2niix -b --minmeta -o /out/bids
 fi
