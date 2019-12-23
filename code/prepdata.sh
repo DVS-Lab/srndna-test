@@ -62,12 +62,12 @@ mv -f ${bidsroot}/sub-${sub}/anat/sub-${sub}_T2w_defaced.nii.gz ${bidsroot}/sub-
 # make derivatives folder if it doesn't exist. 
 # let's keep this out of bids for now
 if [ ! -d $dsroot/derivatives ]; then
-	mkdir -p $dsroot/derivatives
+	mkdir -p $dsroot/derivatives/mriqc
 fi
 
 singularity run --cleanenv \
 -B $dsroot/bids:/data \
--B $dsroot/derivatives:/out \
+-B $dsroot/derivatives/mriqc:/out \
 -B /data/scratch:/scratch \
 /data/tools/mriqc-0.15.1.simg \
 /data /out \
