@@ -4,15 +4,22 @@
 # example: bash run_mriqc.sh 102
 
 sub=$1
+maindir=`pwd`
 
-docker run -it --rm \
--v /data/projects/srndna/bids:/data:ro \
--v /data/projects/srndna/mriqc:/out \
--v /data/projects/srndna/scratch:/scratch \
--u $(id -u):$(id -g) \
+# make derivatives folder if it doesn't exist. 
+# let's keep this out of bids for now
+if [ ! -d $maindir/derivatives ]; then
+	mkdir -p $maindir/derivatives
+fi
+
+
+singularity run --cleanenv \
+-B $maindir/bids:/data \
+-B $maindir/derivatives:/out \
+-B /data/scratch:/scratch \
 -w /scratch \
-poldracklab/mriqc:0.12.1 \
+/data/tools/mriqc-0.15.1.simg \
 /data /out \
 participant --participant_label $sub --fft-spikes-detector --ica -w /scratch
 
-# #--participant_label $sub
+datalad save -m "add mriqc for $sub"
