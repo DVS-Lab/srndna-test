@@ -20,4 +20,4 @@ singularity run --cleanenv \
 /data /out \
 participant --participant_label $sub --fft-spikes-detector --ica -w /scratch
 
-datalad save -m "add mriqc for $sub"
+#datalad save -m "add mriqc for $sub"
