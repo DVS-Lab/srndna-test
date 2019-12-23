@@ -12,10 +12,10 @@ if [ ! -d $maindir/derivatives ]; then
 	mkdir -p $maindir/derivatives
 fi
 
-singularity run -B $maindir:/base -B /data/tools/licenses:/opts \
+singularity run --cleanenv -B $maindir:/base -B /data/tools/licenses:/opts -B /data/scratch:/scratch \
 /data/tools/fmriprep-1.5.3.simg \
 /base/bids /base/derivatives \
 participant --participant_label $sub \
---use-aroma --fs-no-reconall --fs-license-file /opts/fs_license.txt
+--use-aroma --fs-no-reconall --fs-license-file /opts/fs_license.txt -w /scratch
 
 datalad save -m "preprocessed $sub"
