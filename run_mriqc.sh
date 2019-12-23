@@ -21,3 +21,5 @@ singularity run --cleanenv \
 participant --participant_label $sub --fft-spikes-detector --ica -w /scratch
 
 datalad save -m "add mriqc for $sub"
+
+# remove "--participant_label $sub" to run all subjects.
