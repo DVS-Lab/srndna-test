@@ -4,7 +4,9 @@
 # example: bash run_fmriprep.sh 102
 
 sub=$1
-maindir=`pwd`
+
+# set up input and output directories.
+maindir=`pwd` # assume you are running from the root
 
 # make derivatives folder if it doesn't exist. 
 # let's keep this out of bids for now
@@ -17,5 +19,3 @@ singularity run --cleanenv -B $maindir:/base -B /data/tools/licenses:/opts -B /d
 /base/bids /base/derivatives \
 participant --participant_label $sub \
 --use-aroma --fs-no-reconall --fs-license-file /opts/fs_license.txt -w /scratch
-
-datalad save -m "preprocessed $sub"
