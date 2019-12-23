@@ -6,14 +6,22 @@ for subrun in "130 5" "131 5" "132 5" "133 5" "134 4" "135 5" "136 2" "137 5" "1
 	sub=$1
 	nruns=$2
 	
-	SCRIPTNAME=prepdata.sh
+	script=code/prepdata.sh
   	NCORES=5
-  	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
+  	while [ $(ps -ef | grep -v grep | grep $script | wc -l) -ge $NCORES ]; do
  		sleep 1s
   	done
-	bash code/$SCRIPTNAME $sub $nruns &
+	bash $script $sub $nruns &
 done
 
 # ideally, this run_ script would be run through datalad run to reduce conflicts.
 # probably can't run these in parallel without subdatasets because it needs a clean status
 # datalad run -m "sub-$sub heudiconv, defacing, mriqc" "bash code/prepdata.sh $sub $nruns"
+
+
+# wait to exit so logging is correct in datalad run command
+while [ $(ps -ef | grep -v grep | grep $script | wc -l) -ge 1 ]; do
+	sleep 10m
+	echo "STATUS: $0 is waiting to complete at `date`"
+done
+

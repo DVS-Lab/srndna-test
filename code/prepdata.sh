@@ -61,7 +61,7 @@ mv -f ${bidsroot}/sub-${sub}/anat/sub-${sub}_T2w_defaced.nii.gz ${bidsroot}/sub-
 
 # make derivatives folder if it doesn't exist. 
 # let's keep this out of bids for now
-if [ ! -d $dsroot/derivatives ]; then
+if [ ! -d $dsroot/derivatives/mriqc ]; then
 	mkdir -p $dsroot/derivatives/mriqc
 fi
 

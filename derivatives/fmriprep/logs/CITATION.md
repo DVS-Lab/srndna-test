@@ -28,17 +28,7 @@ Functional data preprocessing
 tasks and sessions), the following preprocessing was performed.
 First, a reference volume and its skull-stripped version were generated
 using a custom methodology of *fMRIPrep*.
-A B0-nonuniformity map (or *fieldmap*) was estimated based on a phase-difference map
-calculated with a dual-echo GRE (gradient-recall echo) sequence, processed with a
-custom workflow of *SDCFlows* inspired by the
-[`epidewarp.fsl` script](http://www.nmr.mgh.harvard.edu/~greve/fbirn/b0/epidewarp.fsl)
-and further improvements in HCP Pipelines [@hcppipelines].
-The *fieldmap* was then co-registered to the target EPI (echo-planar imaging)
-reference run and converted to a displacements field map (amenable to registration
-tools such as ANTs) with FSL's `fugue` and other *SDCflows* tools.
-Based on the estimated susceptibility distortion, a corrected
-EPI (echo-planar imaging) reference was calculated for a more
-accurate co-registration with the anatomical reference.
+Susceptibility distortion correction (SDC) was omitted.
 The BOLD reference was then co-registered to the T1w reference using
 `flirt` [FSL 5.0.9, @flirt] with the boundary-based registration [@bbr]
 cost-function.
@@ -52,8 +42,7 @@ BOLD runs were slice-time corrected using `3dTshift` from
 AFNI 20160207 [@afni, RRID:SCR_005927].
 The BOLD time-series (including slice-timing correction when applied)
 were resampled onto their original, native space by applying
-a single, composite transform to correct for head-motion and
-susceptibility distortions.
+the transforms to correct for head-motion.
 These resampled BOLD time-series will be referred to as *preprocessed
 BOLD in original space*, or just *preprocessed BOLD*.
 The BOLD time-series were resampled into several standard spaces,

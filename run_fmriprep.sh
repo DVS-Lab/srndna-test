@@ -14,3 +14,10 @@ for subrun in "130 5" "131 5" "132 5" "133 5" "134 4" "135 5" "136 2" "137 5" "1
   	bash $script $sub &
   	sleep 1s
 done
+
+
+# wait to exit so logging is correct in datalad run command
+while [ $(ps -ef | grep -v grep | grep $script | wc -l) -ge 1 ]; do
+	sleep 10m
+	echo "STATUS: $0 is waiting to complete at `date`"
+done
