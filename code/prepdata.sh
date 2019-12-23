@@ -18,9 +18,8 @@ nruns=$2
 
 
 # set up input and output directories.
-codedir=`pwd`
-cd .. #setting up paths to be relative where possible, but stll need to hardcode sourcedata
-dsroot=`pwd`
+dsroot=`pwd` # assume you are running from the root
+codedir=$dsroot/code
 sourcedata=/data/sourcedata/srndna
 
 # make bids folder if it doesn't exist
@@ -34,15 +33,15 @@ fi
 if [ $sub -gt 121 ]; then
   singularity run -B $dsroot:/out -B $sourcedata:/sourcedata \
   /data/tools/heudiconv-0.5.4.simg -d /sourcedata/dicoms/SMITH-AgingDM-{subject}/*/DICOM/*.dcm -s $sub \
-  -f /out/heuristics.py -c dcm2niix -b --minmeta -o /out/bids
+  -f /out/code/heuristics.py -c dcm2niix -b --minmeta -o /out/bids
 else
   singularity run -B $dsroot:/out -B $sourcedata:/sourcedata \
   /data/tools/heudiconv-0.5.4.simg -d /sourcedata/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
-  -f /out/heuristics.py -c dcm2niix -b --minmeta -o /out/bids
+  -f /out/code/heuristics.py -c dcm2niix -b --minmeta -o /out/bids
 fi
 
 # run Jeff's code to fix field map, but first correct permissions
-chmod -R ug+rw $bidsroot/bids/sub-$sub
+chmod -R ug+rw $dsroot/bids/sub-$sub
 python $codedir/addIntendedFor.py
 
 
