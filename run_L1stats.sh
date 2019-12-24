@@ -14,7 +14,7 @@ for sm in 0 6; do
 		
 		  for run in `seq $nruns`; do
 		  	#Manages the number of jobs and cores
-		  	SCRIPTNAME=L1_task-trust_model-01.sh
+		  	SCRIPTNAME=code/L1_task-trust_model-01.sh
 		  	NCORES=14
 		  	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
 		    		sleep 1s
@@ -25,7 +25,7 @@ for sm in 0 6; do
 		
 		  for run in `seq 2`; do
 		  	#Manages the number of jobs and cores
-		  	SCRIPTNAME=L1_task-sharedreward_model-01.sh
+		  	SCRIPTNAME=code/L1_task-sharedreward_model-01.sh
 		  	NCORES=5
 		  	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
 		    		sleep 1s
@@ -36,7 +36,7 @@ for sm in 0 6; do
 		
 		  for run in `seq 2`; do
 		  	#Manages the number of jobs and cores
-		  	SCRIPTNAME=L1_task-ultimatum_model-01.sh
+		  	SCRIPTNAME=code/L1_task-ultimatum_model-01.sh
 		  	NCORES=5
 		  	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
 		    		sleep 1s
@@ -47,6 +47,6 @@ for sm in 0 6; do
 		
 
 		done
-		sleep 20m
+		sleep 10m
 	done
 done
