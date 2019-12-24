@@ -19,7 +19,7 @@ if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_var
 	fsl_regfilt -i sub-${sub}_task-${TASK}_run-0${run}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz \
 	    -f $(cat sub-${sub}_task-${TASK}_run-0${run}_AROMAnoiseICs.csv) \
 	    -d sub-${sub}_task-${TASK}_run-0${run}_desc-MELODIC_mixing.tsv \
-	    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
+	    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz \
 	    -m sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz
 fi
 
