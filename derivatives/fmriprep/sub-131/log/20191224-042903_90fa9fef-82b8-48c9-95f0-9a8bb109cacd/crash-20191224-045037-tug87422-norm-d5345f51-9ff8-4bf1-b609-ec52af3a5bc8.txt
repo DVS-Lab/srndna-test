@@ -1,0 +1,78 @@
+Node: fmriprep_wf.single_subject_131_wf.anat_preproc_wf.brain_extraction_wf.norm
+Working directory: /scratch/fmriprep_wf/single_subject_131_wf/anat_preproc_wf/brain_extraction_wf/norm
+
+Node inputs:
+
+args = <undefined>
+collapse_output_transforms = True
+convergence_threshold = [1e-08, 1e-08, 1e-09]
+convergence_window_size = [10, 10, 15]
+dimension = 3
+environ = {'NSLOTS': '8'}
+fixed_image = <undefined>
+fixed_image_mask = <undefined>
+fixed_image_masks = ['/home/fmriprep/.cache/templateflow/tpl-OASIS30ANTs/tpl-OASIS30ANTs_res-01_desc-BrainCerebellumExtraction_mask.nii.gz']
+float = True
+initial_moving_transform = <undefined>
+initial_moving_transform_com = <undefined>
+initialize_transforms_per_stage = False
+interpolation = LanczosWindowedSinc
+interpolation_parameters = <undefined>
+invert_initial_moving_transform = <undefined>
+metric = ['MI', 'MI', ['CC', 'CC']]
+metric_item_trait = <undefined>
+metric_stage_trait = <undefined>
+metric_weight = [1.0, 1.0, [0.5, 0.5]]
+metric_weight_item_trait = 1.0
+metric_weight_stage_trait = <undefined>
+moving_image = <undefined>
+moving_image_mask = <undefined>
+moving_image_masks = <undefined>
+num_threads = 8
+number_of_iterations = [[1000, 500, 250, 100], [1000, 500, 250, 100], [50, 10, 0]]
+output_inverse_warped_image = <undefined>
+output_transform_prefix = anat_to_template
+output_warped_image = True
+radius_bins_item_trait = 5
+radius_bins_stage_trait = <undefined>
+radius_or_number_of_bins = [32, 32, [4, 4]]
+restore_state = <undefined>
+restrict_deformation = <undefined>
+sampling_percentage = [0.25, 0.25, [1.0, 1.0]]
+sampling_percentage_item_trait = <undefined>
+sampling_percentage_stage_trait = <undefined>
+sampling_strategy = ['Regular', 'Regular', ['None', 'None']]
+sampling_strategy_item_trait = <undefined>
+sampling_strategy_stage_trait = <undefined>
+save_state = <undefined>
+shrink_factors = [[8, 4, 2, 1], [8, 4, 2, 1], [4, 2, 1]]
+sigma_units = ['vox', 'vox', 'vox']
+smoothing_sigmas = [[4.0, 2.0, 1.0, 0.0], [4.0, 2.0, 1.0, 0.0], [2.0, 1.0, 0.0]]
+transform_parameters = [(0.1,), (0.1,), (0.1, 3.0, 0.0)]
+transforms = ['Rigid', 'Affine', 'SyN']
+use_estimate_learning_rate_once = <undefined>
+use_histogram_matching = True
+verbose = True
+winsorize_lower_quantile = 0.025
+winsorize_upper_quantile = 0.975
+write_composite_transform = False
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.7/shutil.py", line 557, in move
+    os.rename(src, real_dst)
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch/fmriprep_wf/single_subject_131_wf/anat_preproc_wf/brain_extraction_wf/norm/_0x279fa96f39a5bc39ac43ec5a2c38783b_unfinished.json' -> '/scratch/fmriprep_wf/single_subject_131_wf/anat_preproc_wf/brain_extraction_wf/norm/_0x279fa96f39a5bc39ac43ec5a2c38783b.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 492, in run
+    hashfile_unfinished.replace('_unfinished', ''))
+  File "/usr/local/miniconda/lib/python3.7/shutil.py", line 571, in move
+    copy_function(src, real_dst)
+  File "/usr/local/miniconda/lib/python3.7/shutil.py", line 257, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "/usr/local/miniconda/lib/python3.7/shutil.py", line 120, in copyfile
+    with open(src, 'rb') as fsrc:
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch/fmriprep_wf/single_subject_131_wf/anat_preproc_wf/brain_extraction_wf/norm/_0x279fa96f39a5bc39ac43ec5a2c38783b_unfinished.json'
