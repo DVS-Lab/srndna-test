@@ -9,10 +9,10 @@ sub=$1
 run=$2
 ppi=$3 # network -- ecn or dmn
 
-MAINOUTPUT=${maindir}/fsl/sub-${sub}
+MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
-EVDIR=${maindir}/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
+EVDIR=${maindir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
 DATA=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-act_run-0${run}_sm-${sm}.feat/filtered_func_data.nii.gz
 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_nppi-${ppi}_run-0${run}_sm-${sm}
 

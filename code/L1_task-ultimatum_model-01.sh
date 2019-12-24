@@ -9,7 +9,7 @@ run=$2
 ppi=$3 # 0 for activation, otherwise name of the roi
 sm=$4
 
-MAINOUTPUT=${maindir}/fsl/sub-${sub}
+MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
 # denoise data, if it doesn't exist
@@ -19,10 +19,10 @@ if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_var
 	    -f $(cat sub-${sub}_task-${TASK}_run-0${run}_AROMAnoiseICs.csv) \
 	    -d sub-${sub}_task-${TASK}_run-0${run}_desc-MELODIC_mixing.tsv \
 	    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
+	    -m sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz
 fi
 
-
-EVDIR=${maindir}/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
+EVDIR=${maindir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
 if [ "$ppi" == "0" ]; then
 	DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
 	TYPE=act

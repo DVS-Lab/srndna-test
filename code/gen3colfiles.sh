@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+# this script will convert your BIDS *events.tsv files into the 3-col format for FSL
+# it relies on Tom Nichols' converter, which we store locally under /data/tools 
+# https://github.com/bids-standard/bidsutils
+
+
 maindir=`pwd`
-baseout=${maindir}/fsl/EVfiles
+baseout=${maindir}/derivatives/fsl/EVfiles
 if [ ! -d ${baseout} ]; then
   mkdir -p $baseout
 fi
@@ -14,7 +19,7 @@ for run in `seq $nruns`; do
   output=${baseout}/sub-${sub}/trust
   mkdir -p $output
   if [ -e $input ]; then
-    bash BIDSto3col.sh $input ${output}/run-0${run}
+    bash /data/tools/bidsutils/BIDSto3col/BIDSto3col.sh $input ${output}/run-0${run}
   else
     echo "PATH ERROR: cannot locate ${input}."
     exit
@@ -25,7 +30,7 @@ for run in 1 2; do
   output=${baseout}/sub-${sub}/sharedreward
   mkdir -p $output
   if [ -e $input ]; then
-    bash BIDSto3col.sh $input ${output}/run-0${run}
+    bash /data/tools/bidsutils/BIDSto3col/BIDSto3col.sh $input ${output}/run-0${run}
   else
     echo "PATH ERROR: cannot locate ${input}."
     exit
@@ -36,7 +41,7 @@ for run in 1 2; do
   output=${baseout}/sub-${sub}/ultimatum
   mkdir -p $output
   if [ -e $input ]; then
-    bash BIDSto3col.sh $input ${output}/run-0${run}
+    bash /data/tools/bidsutils/BIDSto3col/BIDSto3col.sh $input ${output}/run-0${run}
   else
     echo "PATH ERROR: cannot locate ${input}."
     exit
