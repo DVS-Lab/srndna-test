@@ -1,5 +1,8 @@
 function convertTrust_BIDS(subj)
 maindir = pwd;
+cd ..
+dsdir = pwd;
+cd(maindir)
 
 % Partner is Friend=3, Stranger=2, Computer=1
 % Reciprocate is Yes=1, No=0
@@ -35,7 +38,7 @@ try
         options = [cLeft cRight];
         
         fname = sprintf('sub-%03d_task-trust_run-%02d_events.tsv',subj,r+1);
-        output = fullfile(maindir,'bids',['sub-' num2str(subj)],'func');
+        output = fullfile(dsdir,'bids',['sub-' num2str(subj)],'func');
         if ~exist(output,'dir')
             mkdir(output)
         end
@@ -83,7 +86,7 @@ try
         fclose(fid);
         rand_trial = randsample(1:36,1);
         if trust_val(rand_trial) == 999
-            fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant did not respond.\n',subj, r+1, rand_trial);
+            %fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant did not respond.\n',subj, r+1, rand_trial);
         else
             if reciprocate(rand_trial)
                 participant = (8 - trust_val(rand_trial)) + ((trust_val(rand_trial) * 3)/2);
@@ -99,7 +102,7 @@ try
             elseif (Partner(rand_trial) == 3)
                 trial_type = 'Friend';
             end
-            fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', subj, r+1, rand_trial, participant, trial_type, friend);
+            %fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', subj, r+1, rand_trial, participant, trial_type, friend);
         end
     end
     

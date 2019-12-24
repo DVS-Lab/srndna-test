@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
-# Example code for heudiconv and pydeface. This will get your data read for analyses.
-# This code will convert DICOMS to BIDS. Will also deface and run MRIQC.
+# Example code for heudiconv and pydeface. This will get your data ready for analyses.
+# This code will convert DICOMS to BIDS (PART 1). Will also deface (PART 2) and run MRIQC (PART 3).
  
 # usage: bash prepdata.sh sub nruns
 # example: bash prepdata.sh 104 3
 
 # Notes: 
-# 1) containers live under /data/tools on local computer
+# 1) containers live under /data/tools on local computer. should these relative paths and shared? YODA principles would suggest so.
 # 2) already created a dataset with datalad
 # datalad create --description "creating srndna-all dataset" -c text2git srndna-all
 # 3) other projects should use Jeff's python script for fixing the IntendedFor 
+# 4) aside from containers, only absolute path in whole workflow (transparent to folks who aren't allowed to access to raw data)
+sourcedata=/data/sourcedata/srndna
 
 
 sub=$1
@@ -20,7 +22,7 @@ nruns=$2
 # set up input and output directories.
 dsroot=`pwd` # assume you are running from the root
 codedir=$dsroot/code
-sourcedata=/data/sourcedata/srndna
+
 
 # make bids folder if it doesn't exist
 if [ ! -d $dsroot/bids ]; then

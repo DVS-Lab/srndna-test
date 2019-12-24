@@ -1,5 +1,8 @@
 function convertSharedReward_BIDS(subj)
 maindir = pwd;
+cd ..
+dsdir = pwd;
+cd(maindir)
 
 try
     
@@ -28,7 +31,7 @@ try
         
         
         fname = sprintf('sub-%03d_task-sharedreward_run-%02d_events.tsv',subj,r+1); % need to make fMRI run number consistent with this?
-        output = fullfile(maindir,'bids',['sub-' num2str(subj)],'func');
+        output = fullfile(dsdir,'bids',['sub-' num2str(subj)],'func');
         if ~exist(output,'dir')
             mkdir(output)
         end
@@ -92,13 +95,13 @@ try
         elseif (Partner(rand_trial) == 3)
             trial_type = 'Friend';
         end
-        if feedback(rand_trial) == 1 %punish
-            fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant LOSES $5 and %s LOSES $5.\n', subj, r+1, rand_trial, trial_type);
-        elseif feedback(rand_trial) == 2 %neutral
-            fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant sees a card with a 5 on it.\n', subj, r+1, rand_trial);
-        elseif feedback(rand_trial) == 3 %reward
-            fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant WINS $5 and %s WINS $5.\n', subj, r+1, rand_trial, trial_type);
-        end
+%         if feedback(rand_trial) == 1 %punish
+%             fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant LOSES $5 and %s LOSES $5.\n', subj, r+1, rand_trial, trial_type);
+%         elseif feedback(rand_trial) == 2 %neutral
+%             fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant sees a card with a 5 on it.\n', subj, r+1, rand_trial);
+%         elseif feedback(rand_trial) == 3 %reward
+%             fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant WINS $5 and %s WINS $5.\n', subj, r+1, rand_trial, trial_type);
+%         end
         
     end
     

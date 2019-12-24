@@ -1,5 +1,8 @@
 function convertUG_BIDS(subj)
 maindir = pwd;
+cd ..
+dsdir = pwd;
+cd(maindir)
 
 try
     
@@ -29,7 +32,7 @@ try
         response = C{11};
         
         fname = sprintf('sub-%03d_task-ultimatum_run-%02d_events.tsv',subj,r+1); % making compatible with bids output
-        output = fullfile(maindir,'bids',['sub-' num2str(subj)],'func');
+        output = fullfile(dsdir,'bids',['sub-' num2str(subj)],'func');
         if ~exist(output,'dir')
             mkdir(output)
         end
@@ -90,11 +93,11 @@ try
         %display payment information
         rand_trial = randsample(1:72,1);
         if response(rand_trial) == 2
-            fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant REJECTED the deal and walks away with $0.\n', subj, r+1, rand_trial);
+            %fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant REJECTED the deal and walks away with $0.\n', subj, r+1, rand_trial);
         elseif response(rand_trial) == 3
-            fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant ACCEPTED the deal and walks away with $%.2f.\n', subj, r+1, rand_trial, Offer(rand_trial));
+            %fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant ACCEPTED the deal and walks away with $%.2f.\n', subj, r+1, rand_trial, Offer(rand_trial));
         elseif response(rand_trial) == 999
-            fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant did not respond and walks away with $0.\n', subj, r+1, rand_trial);
+            %fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant did not respond and walks away with $0.\n', subj, r+1, rand_trial);
         end
     end
     
