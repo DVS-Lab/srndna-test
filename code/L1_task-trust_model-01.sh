@@ -14,7 +14,7 @@ MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
 # denoise data, if it doesn't exist
-cd ${maindir}/fmriprep/fmriprep/sub-${sub}/func
+cd ${maindir}/derivatives/fmriprep/sub-${sub}/func
 if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz ]; then
 	fsl_regfilt -i sub-${sub}_task-${TASK}_run-0${run}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz \
 	    -f $(cat sub-${sub}_task-${TASK}_run-0${run}_AROMAnoiseICs.csv) \
