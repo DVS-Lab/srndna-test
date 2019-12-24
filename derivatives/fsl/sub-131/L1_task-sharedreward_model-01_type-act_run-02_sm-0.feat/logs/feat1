@@ -1,0 +1,21 @@
+
+/bin/cp /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_seed-0_run-02.fsf design.fsf
+
+/usr/share/fsl/6.0.3/bin/feat_model design
+
+mkdir .files;cp /usr/share/fsl/6.0.3/doc/fsl.css .files;cp -r /usr/share/fsl/6.0.3/doc/images .files/images
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat -I 1 -init
+409
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 20 -l logs -N feat2_pre -j 409  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat -I 1 -prestats
+3967
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 6 -l logs -N feat3_film -j 3967  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat -I 1 -stats
+17070
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 119 -l logs -N feat4_post -j 17070  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat -poststats 0 
+27705
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 3967,17070,27705  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat -stop
+38569
