@@ -1,0 +1,34 @@
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/share/fsl/6.0.3/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/share/fsl/6.0.3/bin/immv mask_mask mask
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/share/fsl/6.0.3/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 12349.913086 
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_bet -thr 1234.9913086 -Tmin -bin mask -odt char
+
+/usr/share/fsl/6.0.3/bin/fslstats prefiltered_func_data -k mask -p 50
+10002.710938 
+
+/usr/share/fsl/6.0.3/bin/fslmaths mask -dilF mask
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_thresh -mul 0.999728979672 prefiltered_func_data_intnorm
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_intnorm -Tmean tempMean
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_intnorm -bptf 24.7524752475 -1 -add tempMean prefiltered_func_data_tempfilt
+
+/usr/share/fsl/6.0.3/bin/imrm tempMean
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_tempfilt filtered_func_data
+
+/usr/share/fsl/6.0.3/bin/fslmaths filtered_func_data -Tmean mean_func
+
+/bin/rm -rf prefiltered_func_data*

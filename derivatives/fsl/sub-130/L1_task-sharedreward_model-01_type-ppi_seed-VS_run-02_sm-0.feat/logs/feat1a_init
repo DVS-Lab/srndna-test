@@ -1,0 +1,6 @@
+</pre><hr>Initialisation<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-sharedreward_model-01_type-act_run-02_sm-0.feat/filtered_func_data prefiltered_func_data -odt float
+Total original volumes = 202
+
+/usr/share/fsl/6.0.3/bin/fslroi prefiltered_func_data example_func 101 1

@@ -1,0 +1,25 @@
+
+/bin/cp /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_seed-0_run-03.fsf design.fsf
+
+/usr/share/fsl/6.0.3/bin/feat_model design
+Warning: at least one EV is (close to) a linear combination of the others. You probably need to alter your design.
+(Design matrix is rank deficient - ratio of min:max eigenvalues in SVD of matrix is 0)
+ Contrasts involving these combinations will be set to zero.
+
+
+mkdir .files;cp /usr/share/fsl/6.0.3/doc/fsl.css .files;cp -r /usr/share/fsl/6.0.3/doc/images .files/images
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat -I 1 -init
+19474
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 21 -l logs -N feat2_pre -j 19474  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat -I 1 -prestats
+21335
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 11 -l logs -N feat3_film -j 21335  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat -I 1 -stats
+26964
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 119 -l logs -N feat4_post -j 26964  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat -poststats 0 
+43273
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 21335,26964,43273  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-trust_model-01_type-act_run-03_sm-6.feat -stop
+19710

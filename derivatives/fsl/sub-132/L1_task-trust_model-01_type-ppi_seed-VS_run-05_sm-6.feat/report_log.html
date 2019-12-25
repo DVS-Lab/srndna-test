@@ -1,0 +1,66 @@
+<HTML><HEAD>
+<!--refreshstart-->
+<META HTTP-EQUIV=REFRESH CONTENT=5>
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Tue Dec 24 23:38:44 EST 2019<p>
+Feat main script<br><pre>
+
+/bin/cp /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_seed-VS_run-05.fsf design.fsf
+
+/usr/share/fsl/6.0.3/bin/feat_model design
+Warning: at least one EV is (close to) a linear combination of the others. You probably need to alter your design.
+(Design matrix is rank deficient - ratio of min:max eigenvalues in SVD of matrix is 0)
+ Contrasts involving these combinations will be set to zero.
+
+
+mkdir .files;cp /usr/share/fsl/6.0.3/doc/fsl.css .files;cp -r /usr/share/fsl/6.0.3/doc/images .files/images
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-ppi_seed-VS_run-05_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-ppi_seed-VS_run-05_sm-6.feat -I 1 -init
+26024
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 21 -l logs -N feat2_pre -j 26024  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-ppi_seed-VS_run-05_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-ppi_seed-VS_run-05_sm-6.feat -I 1 -prestats
+
+FATAL ERROR ENCOUNTERED:
+COMMAND:
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 21 -l logs -N feat2_pre -j 26024  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-ppi_seed-VS_run-05_sm-6.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-ppi_seed-VS_run-05_sm-6.feat -I 1 -prestats
+ERROR MESSAGE:
+child killed: interrupt
+END OF ERROR MESSAGE
+</pre><hr>Initialisation<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths /data/projects/srndna-test/derivatives/fsl/sub-132/L1_task-trust_model-01_type-act_run-05_sm-6.feat/filtered_func_data prefiltered_func_data -odt float
+Total original volumes = 217
+
+/usr/share/fsl/6.0.3/bin/fslroi prefiltered_func_data example_func 108 1
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/share/fsl/6.0.3/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/share/fsl/6.0.3/bin/immv mask_mask mask
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/share/fsl/6.0.3/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 11717.291016 
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_bet -thr 1171.7291016 -Tmin -bin mask -odt char
+
+/usr/share/fsl/6.0.3/bin/fslstats prefiltered_func_data -k mask -p 50
+9958.068359 
+
+/usr/share/fsl/6.0.3/bin/fslmaths mask -dilF mask
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_thresh -Tmean mean_func
+
+/usr/share/fsl/6.0.3/bin/susan prefiltered_func_data_thresh 7468.55126925 2.54777070064 3 1 1 mean_func 7468.55126925 prefiltered_func_data_smooth
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_smooth -mas mask prefiltered_func_data_smooth
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_smooth -mul 1.00421082076 prefiltered_func_data_intnorm
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>

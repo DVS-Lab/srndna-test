@@ -1,0 +1,6 @@
+</pre><hr>Initialisation<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths /data/projects/srndna-test/derivatives/fsl/sub-131/L1_task-trust_model-01_type-act_run-02_sm-0.feat/filtered_func_data prefiltered_func_data -odt float
+Total original volumes = 217
+
+/usr/share/fsl/6.0.3/bin/fslroi prefiltered_func_data example_func 108 1

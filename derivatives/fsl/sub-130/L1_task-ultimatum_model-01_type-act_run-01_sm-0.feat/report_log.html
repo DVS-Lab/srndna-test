@@ -1,0 +1,307 @@
+<HTML><HEAD>
+<!--refreshstart-->
+
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Tue Dec 24 22:20:48 EST 2019<p>
+Feat main script<br><pre>
+
+/bin/cp /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_seed-0_run-01.fsf design.fsf
+
+/usr/share/fsl/6.0.3/bin/feat_model design
+
+mkdir .files;cp /usr/share/fsl/6.0.3/doc/fsl.css .files;cp -r /usr/share/fsl/6.0.3/doc/images .files/images
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat -I 1 -init
+31411
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 177 -l logs -N feat2_pre -j 31411  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat -I 1 -prestats
+32902
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 39 -l logs -N feat3_film -j 32902  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat -I 1 -stats
+40644
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 119 -l logs -N feat4_post -j 40644  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat -poststats 0 
+42982
+
+/usr/share/fsl/6.0.3/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 32902,40644,42982  /usr/share/fsl/6.0.3/bin/feat /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat/design.fsf -D /data/projects/srndna-test/derivatives/fsl/sub-130/L1_task-ultimatum_model-01_type-act_run-01_sm-0.feat -stop
+</pre><hr>Initialisation<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths /data/projects/srndna-test/derivatives/fmriprep/sub-130/func/sub-130_task-ultimatum_run-01_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc prefiltered_func_data -odt float
+Total original volumes = 200
+
+/usr/share/fsl/6.0.3/bin/fslroi prefiltered_func_data example_func 100 1
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/share/fsl/6.0.3/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/share/fsl/6.0.3/bin/immv mask_mask mask
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/share/fsl/6.0.3/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 938.836121 
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_bet -thr 93.8836121 -Tmin -bin mask -odt char
+
+/usr/share/fsl/6.0.3/bin/fslstats prefiltered_func_data -k mask -p 50
+756.854248 
+
+/usr/share/fsl/6.0.3/bin/fslmaths mask -dilF mask
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_thresh -mul 13.2125835673 prefiltered_func_data_intnorm
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_intnorm -Tmean tempMean
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_intnorm -bptf 49.504950495 -1 -add tempMean prefiltered_func_data_tempfilt
+
+/usr/share/fsl/6.0.3/bin/imrm tempMean
+
+/usr/share/fsl/6.0.3/bin/fslmaths prefiltered_func_data_tempfilt filtered_func_data
+
+/usr/share/fsl/6.0.3/bin/fslmaths filtered_func_data -Tmean mean_func
+
+/bin/rm -rf prefiltered_func_data*
+</pre><hr>Stats<br><pre>
+
+mkdir -p custom_timing_files ; /usr/share/fsl/6.0.3/bin/fslFixText /data/projects/srndna-test/derivatives/fsl/EVfiles/sub-130/ultimatum/run-01_block_computer_fair.txt custom_timing_files/ev1.txt
+
+mkdir -p custom_timing_files ; /usr/share/fsl/6.0.3/bin/fslFixText /data/projects/srndna-test/derivatives/fsl/EVfiles/sub-130/ultimatum/run-01_block_computer_unfair.txt custom_timing_files/ev2.txt
+
+mkdir -p custom_timing_files ; /usr/share/fsl/6.0.3/bin/fslFixText /data/projects/srndna-test/derivatives/fsl/EVfiles/sub-130/ultimatum/run-01_block_ingroup_fair.txt custom_timing_files/ev3.txt
+
+mkdir -p custom_timing_files ; /usr/share/fsl/6.0.3/bin/fslFixText /data/projects/srndna-test/derivatives/fsl/EVfiles/sub-130/ultimatum/run-01_block_ingroup_unfair.txt custom_timing_files/ev4.txt
+
+mkdir -p custom_timing_files ; /usr/share/fsl/6.0.3/bin/fslFixText /data/projects/srndna-test/derivatives/fsl/EVfiles/sub-130/ultimatum/run-01_block_outgroup_fair.txt custom_timing_files/ev5.txt
+
+mkdir -p custom_timing_files ; /usr/share/fsl/6.0.3/bin/fslFixText /data/projects/srndna-test/derivatives/fsl/EVfiles/sub-130/ultimatum/run-01_block_outgroup_unfair.txt custom_timing_files/ev6.txt
+
+/usr/share/fsl/6.0.3/bin/film_gls --in=filtered_func_data --rn=stats --pd=design.mat --thr=1000.0 --sa --ms=5 --con=design.con  
+Log directory is: stats
+paradigm.getDesignMatrix().Nrows()=200
+paradigm.getDesignMatrix().Ncols()=6
+sizeTS=200
+numTS=73488
+Calculating residuals...
+Completed
+Estimating residual autocorrelation...
+Calculating raw AutoCorrs... Completed
+mode = 9438.96
+sig = 1619
+Spatially smoothing auto corr estimates
+.............
+Completed
+Tukey M = 14
+Tukey estimates... Completed
+Completed
+Prewhitening and Computing PEs...
+Percentage done:
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,Completed
+Saving results... 
+Completed
+
+/usr/share/fsl/6.0.3/bin/smoothest -d 193   -m mask -r stats/res4d > stats/smoothness
+</pre><hr>Post-stats<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat1 -mas mask thresh_zstat1
+
+echo 73488 > thresh_zstat1.vol
+zstat1: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat2 -mas mask thresh_zstat2
+
+echo 73488 > thresh_zstat2.vol
+zstat2: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat3 -mas mask thresh_zstat3
+
+echo 73488 > thresh_zstat3.vol
+zstat3: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat4 -mas mask thresh_zstat4
+
+echo 73488 > thresh_zstat4.vol
+zstat4: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat5 -mas mask thresh_zstat5
+
+echo 73488 > thresh_zstat5.vol
+zstat5: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat6 -mas mask thresh_zstat6
+
+echo 73488 > thresh_zstat6.vol
+zstat6: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat7 -mas mask thresh_zstat7
+
+echo 73488 > thresh_zstat7.vol
+zstat7: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat8 -mas mask thresh_zstat8
+
+echo 73488 > thresh_zstat8.vol
+zstat8: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat9 -mas mask thresh_zstat9
+
+echo 73488 > thresh_zstat9.vol
+zstat9: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat10 -mas mask thresh_zstat10
+
+echo 73488 > thresh_zstat10.vol
+zstat10: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 73488 > thresh_zstat11.vol
+zstat11: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 73488 > thresh_zstat12.vol
+zstat12: DLH=3.98805 VOLUME=73488 RESELS=1.15971
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat1 -t 2.3 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat1 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat2 -t 2.3 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat2 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat3 -t 2.3 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat3 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat4 -t 2.3 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat4 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat5 -t 2.3 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat5 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat6 -t 2.3 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat6 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat7 -t 2.3 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat7 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat8 -t 2.3 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat8 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat9 -t 2.3 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat9 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat10 -t 2.3 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat10 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat11 -t 2.3 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat11 
+
+/usr/share/fsl/6.0.3/bin/cluster -i thresh_zstat12 -t 2.3 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 3.98805 --volume=73488 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/share/fsl/6.0.3/bin/cluster2html . cluster_zstat12 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat1 -l 0.0001 -R 2>/dev/null
+2.300140 6.201737 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat2 -l 0.0001 -R 2>/dev/null
+2.300078 5.523520 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat3 -l 0.0001 -R 2>/dev/null
+2.300157 6.745313 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat4 -l 0.0001 -R 2>/dev/null
+2.300480 6.197097 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat5 -l 0.0001 -R 2>/dev/null
+2.300207 7.548645 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat6 -l 0.0001 -R 2>/dev/null
+2.301782 6.757004 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat7 -l 0.0001 -R 2>/dev/null
+2.304793 5.371008 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat8 -l 0.0001 -R 2>/dev/null
+2.300884 5.516139 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat9 -l 0.0001 -R 2>/dev/null
+2.300022 5.205292 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat10 -l 0.0001 -R 2>/dev/null
+2.300196 6.316381 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat11 -l 0.0001 -R 2>/dev/null
+2.300166 5.081741 
+
+/usr/share/fsl/6.0.3/bin/fslstats thresh_zstat12 -l 0.0001 -R 2>/dev/null
+2.300196 6.316381 
+Rendering using zmin=2.300022 zmax=7.548645
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat1 2.300022 7.548645 rendered_thresh_zstat1
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat1 -A 750 rendered_thresh_zstat1.png
+
+/bin/cp /usr/share/fsl/6.0.3/etc/luts/ramp.gif .ramp.gif
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat2 2.300022 7.548645 rendered_thresh_zstat2
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat2 -A 750 rendered_thresh_zstat2.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat3 2.300022 7.548645 rendered_thresh_zstat3
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat3 -A 750 rendered_thresh_zstat3.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat4 2.300022 7.548645 rendered_thresh_zstat4
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat4 -A 750 rendered_thresh_zstat4.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat5 2.300022 7.548645 rendered_thresh_zstat5
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat5 -A 750 rendered_thresh_zstat5.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat6 2.300022 7.548645 rendered_thresh_zstat6
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat6 -A 750 rendered_thresh_zstat6.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat7 2.300022 7.548645 rendered_thresh_zstat7
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat7 -A 750 rendered_thresh_zstat7.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat8 2.300022 7.548645 rendered_thresh_zstat8
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat8 -A 750 rendered_thresh_zstat8.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat9 2.300022 7.548645 rendered_thresh_zstat9
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat9 -A 750 rendered_thresh_zstat9.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat10 2.300022 7.548645 rendered_thresh_zstat10
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat10 -A 750 rendered_thresh_zstat10.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat11 2.300022 7.548645 rendered_thresh_zstat11
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat11 -A 750 rendered_thresh_zstat11.png
+
+/usr/share/fsl/6.0.3/bin/overlay 1 0 example_func -a thresh_zstat12 2.300022 7.548645 rendered_thresh_zstat12
+
+/usr/share/fsl/6.0.3/bin/slicer rendered_thresh_zstat12 -A 750 rendered_thresh_zstat12.png
+
+mkdir -p tsplot ; /usr/share/fsl/6.0.3/bin/tsplot . -f filtered_func_data -o tsplot
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>

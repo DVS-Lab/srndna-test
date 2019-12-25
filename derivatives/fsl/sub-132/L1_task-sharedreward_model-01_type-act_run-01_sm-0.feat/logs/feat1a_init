@@ -1,0 +1,6 @@
+</pre><hr>Initialisation<br><pre>
+
+/usr/share/fsl/6.0.3/bin/fslmaths /data/projects/srndna-test/derivatives/fmriprep/sub-132/func/sub-132_task-sharedreward_run-01_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc prefiltered_func_data -odt float
+Total original volumes = 202
+
+/usr/share/fsl/6.0.3/bin/fslroi prefiltered_func_data example_func 101 1
