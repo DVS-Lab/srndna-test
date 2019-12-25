@@ -42,7 +42,7 @@ else
 	rm -rf ${OUTPUT}.feat
 fi
 
-ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-01_type-${TYPE}.fsf
+ITEMPLATE=${maindir}/derivatives/fsl/templates/L1_task-${TASK}_model-01_type-${TYPE}.fsf
 OTEMPLATE=${MAINOUTPUT}/L1_task-${TASK}_model-01_seed-${ppi}_run-0${run}.fsf
 
 if [ "$ppi" == "0" ]; then

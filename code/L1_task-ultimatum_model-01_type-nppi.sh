@@ -42,7 +42,7 @@ else
 	OTHERNET=$DMN
 fi
 
-ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-01_type-nppi.fsf
+ITEMPLATE=${maindir}/derivatives/fsl/templates/L1_task-${TASK}_model-01_type-nppi.fsf
 OTEMPLATE=${MAINOUTPUT}/L1_task-${TASK}_model-01_nppi-${ppi}_run-0${run}.fsf
 sed -e 's@OUTPUT@'$OUTPUT'@g' \
 -e 's@DATA@'$DATA'@g' \
