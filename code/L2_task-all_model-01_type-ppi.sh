@@ -7,7 +7,7 @@ nruns=$2
 ppi=$3
 sm=$4
 
-MAINOUTPUT=${maindir}/fsl/sub-${sub}
+MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 
 # Trust Task
 NCOPES=19

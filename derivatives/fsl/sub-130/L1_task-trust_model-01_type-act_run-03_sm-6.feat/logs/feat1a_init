@@ -1,6 +1,0 @@
-</pre><hr>Initialisation<br><pre>
-
-/usr/share/fsl/6.0.3/bin/fslmaths /data/projects/srndna-test/derivatives/fmriprep/sub-130/func/sub-130_task-trust_run-03_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc prefiltered_func_data -odt float
-Total original volumes = 217
-
-/usr/share/fsl/6.0.3/bin/fslroi prefiltered_func_data example_func 108 1

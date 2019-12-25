@@ -6,7 +6,7 @@ sub=$1
 nruns=$2
 sm=$3
 
-MAINOUTPUT=${maindir}/fsl/sub-${sub}
+MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 
 # Trust Task
 NCOPES=18
