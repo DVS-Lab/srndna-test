@@ -32,7 +32,7 @@ else
 	echo "re-doing: ${OUTPUT}" >> re-runL2.log
 	rm -rf ${OUTPUT}.gfeat
 
-	ITEMPLATE=${maindir}/templates/L2_task-trust_model-01_type-ppi_nruns-${nruns}.fsf
+	ITEMPLATE=${maindir}/derivatives/fsl/templates/L2_task-trust_model-01_type-ppi_nruns-${nruns}.fsf
 	OTEMPLATE=${MAINOUTPUT}/L2_task-trust_model-01_type-ppi_seed-${ppi}.fsf
 	
 	if [ ${nruns} -eq 5 ]; then
@@ -88,7 +88,7 @@ if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 else
 	rm -rf ${OUTPUT}.gfeat
 	
-	ITEMPLATE=${maindir}/templates/L2_task-sharedreward_model-01_type-ppi.fsf
+	ITEMPLATE=${maindir}/derivatives/fsl/templates/L2_task-sharedreward_model-01_type-ppi.fsf
 	OTEMPLATE=${MAINOUTPUT}/L2_task-sharedreward_model-01_type-ppi_seed-${ppi}.fsf
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
 	-e 's@INPUT1@'$INPUT1'@g' \
@@ -119,7 +119,7 @@ if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 else
 	rm -rf ${OUTPUT}.gfeat
 
-	ITEMPLATE=${maindir}/templates/L2_task-ultimatum_model-01_type-ppi.fsf
+	ITEMPLATE=${maindir}/derivatives/fsl/templates/L2_task-ultimatum_model-01_type-ppi.fsf
 	OTEMPLATE=${MAINOUTPUT}/L2_task-ultimatum_model-01_type-ppi_seed-${ppi}.fsf
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
 	-e 's@INPUT1@'$INPUT1'@g' \
